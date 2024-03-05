@@ -61,8 +61,8 @@ void AShooterCharacter::Move(const FInputActionInstance& InputActionInstance)
 void AShooterCharacter::Look(const FInputActionInstance& InputActionInstance)
 {
 	const FVector2d LookValue = InputActionInstance.GetValue().Get<FVector2d>();
-	AddControllerPitchInput(-LookValue.Y);
-	AddControllerYawInput(LookValue.X);
+	AddControllerPitchInput(-LookValue.Y * RotationRate * GetWorld()->DeltaTimeSeconds);
+	AddControllerYawInput(LookValue.X * RotationRate * GetWorld()->DeltaTimeSeconds);
 }
 
 void AShooterCharacter::Fire(const FInputActionInstance& InputActionInstance)
