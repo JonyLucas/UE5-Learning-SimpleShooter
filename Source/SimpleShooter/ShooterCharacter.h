@@ -45,7 +45,7 @@ protected:
 	UInputAction* JumpAction;
 
 private:
-	UPROPERTY(EditAnywhere, Category="Movement")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Movement", meta=(AllowPrivateAccess="true"))
 	float MoveSpeed = 100.f;
 	
 	UPROPERTY(EditAnywhere, Category="Movement")

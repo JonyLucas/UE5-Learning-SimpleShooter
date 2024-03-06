@@ -54,8 +54,10 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 void AShooterCharacter::Move(const FInputActionInstance& InputActionInstance)
 {
 	const FVector2d MoveValue = InputActionInstance.GetValue().Get<FVector2d>();
-	const FVector MoveDirection = MoveValue.Y * FVector::ForwardVector + MoveValue.X * FVector::RightVector;
-	AddActorLocalOffset(MoveDirection * MoveSpeed * GetWorld()->DeltaTimeSeconds, true);
+	const FVector MoveDirection = MoveValue.Y * GetActorForwardVector() + MoveValue.X * GetActorRightVector();
+
+	AddMovementInput(MoveDirection.GetSafeNormal2D(), MoveSpeed);
+	// AddActorLocalOffset(MoveDirection * MoveSpeed * GetWorld()->DeltaTimeSeconds, true);
 }
 
 void AShooterCharacter::Look(const FInputActionInstance& InputActionInstance)
