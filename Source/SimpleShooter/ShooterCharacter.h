@@ -7,6 +7,7 @@
 #include "GameFramework/Character.h"
 #include "ShooterCharacter.generated.h"
 
+class AAGun;
 class UInputAction;
 class UInputMappingContext;
 
@@ -50,6 +51,12 @@ private:
 	
 	UPROPERTY(EditAnywhere, Category="Movement")
 	float RotationRate = 10.f;
+
+	UPROPERTY(EditDefaultsOnly, Category="Shooting", meta=(AllowPrivateAccess="true"))
+	TSubclassOf<AAGun> GunClass;
+
+	UPROPERTY()
+	AAGun* Gun;
 	
 	APlayerController* PlayerController;
 	void Move(const FInputActionInstance& InputActionInstance);

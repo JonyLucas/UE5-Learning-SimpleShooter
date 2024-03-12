@@ -3,6 +3,7 @@
 
 #include "ShooterCharacter.h"
 
+#include "AGun.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 
@@ -18,7 +19,7 @@ AShooterCharacter::AShooterCharacter()
 void AShooterCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	Gun = GetWorld()->SpawnActor<AAGun>(GunClass);
 }
 
 // Called every frame
