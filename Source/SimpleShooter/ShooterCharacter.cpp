@@ -73,6 +73,6 @@ void AShooterCharacter::Look(const FInputActionInstance& InputActionInstance)
 
 void AShooterCharacter::Fire(const FInputActionInstance& InputActionInstance)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Fire"));
+	Gun->PullTrigger();
 }
 

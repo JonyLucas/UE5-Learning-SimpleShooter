@@ -14,6 +14,8 @@ class SIMPLESHOOTER_API AAGun : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AAGun();
+	virtual void Tick(float DeltaTime) override;
+	void PullTrigger();
 
 protected:
 	// Called when the game starts or when spawned
@@ -25,8 +27,10 @@ protected:
 	UPROPERTY(VisibleAnywhere)
 	USkeletalMeshComponent* MeshComponent;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	UPROPERTY(EditAnywhere)
+	UParticleSystem* MuzzleFlash;
+
+	UPROPERTY(EditAnywhere)
+	float MaxRange = 1000.f;
 
 };
