@@ -31,6 +31,9 @@ protected:
 	UParticleSystem* MuzzleFlash;
 
 	UPROPERTY(EditAnywhere)
+	UParticleSystem* HitEffect;
+
+	UPROPERTY(EditAnywhere)
 	float MaxRange = 1000.f;
 
 };

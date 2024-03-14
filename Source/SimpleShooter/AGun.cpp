@@ -49,6 +49,7 @@ void AAGun::PullTrigger()
 	FHitResult Hit;
 	if (GetWorld()->LineTraceSingleByChannel(Hit, Location, EndVector, ECollisionChannel::ECC_GameTraceChannel1))
 	{
-		DrawDebugPoint(GetWorld(), Hit.ImpactPoint, 20.f, FColor::Red, true);
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), HitEffect, Hit.ImpactPoint, Hit.ImpactNormal.Rotation());
+		// DrawDebugPoint(GetWorld(), Hit.ImpactPoint, 20.f, FColor::Red, true);
 	}
 }
