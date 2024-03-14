@@ -55,7 +55,7 @@ void AAGun::PullTrigger()
 		if (AActor* HitActor = Hit.GetActor())
 		{
 			FPointDamageEvent DamageEvent(Damage, Hit, Rotation.Vector(), UDamageType::StaticClass());
-			Cast<ACharacter>(Hit.GetActor())->TakeDamage(Damage, DamageEvent, OwnerController, OwnerPawn);
+			HitActor->TakeDamage(Damage, DamageEvent, OwnerController, OwnerPawn);
 		}
 		// DrawDebugPoint(GetWorld(), Hit.ImpactPoint, 20.f, FColor::Red, true);
 	}

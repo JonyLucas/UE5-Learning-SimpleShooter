@@ -19,6 +19,7 @@ AShooterCharacter::AShooterCharacter()
 void AShooterCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+	Health = MaxHealth;
 	Gun = GetWorld()->SpawnActor<AAGun>(GunClass);
 	GetMesh()->HideBoneByName("weapon_r", PBO_None);
 	Gun->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, "WeaponSocket");
@@ -81,6 +82,7 @@ float AShooterCharacter::TakeDamage(const float DamageAmount, FDamageEvent const
 {
 	float DamageTaken = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 	Health -= DamageTaken;
+	Health = FMath::Clamp(Health, 0.f, MaxHealth);
 	UE_LOG(LogTemp, Warning, TEXT("Health: %f"), Health);
 	return DamageTaken;
 }
