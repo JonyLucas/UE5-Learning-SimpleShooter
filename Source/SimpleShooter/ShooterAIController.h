@@ -22,5 +22,11 @@ protected:
 
 private:
 	AActor* PlayerPawn;
+
+	UPROPERTY(EditAnywhere)
+	float AcceptanceRadius = 200.f;
+
+	UPROPERTY(EditAnywhere)
+	UBehaviorTree* AIBehavior;
 	
 };
