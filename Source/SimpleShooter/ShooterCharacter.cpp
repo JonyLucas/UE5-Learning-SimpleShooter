@@ -76,3 +76,12 @@ void AShooterCharacter::Fire(const FInputActionInstance& InputActionInstance)
 	Gun->PullTrigger();
 }
 
+float AShooterCharacter::TakeDamage(const float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator,
+                                    AActor* DamageCauser)
+{
+	float DamageTaken = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+	Health -= DamageTaken;
+	UE_LOG(LogTemp, Warning, TEXT("Health: %f"), Health);
+	return DamageTaken;
+}
+

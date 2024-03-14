@@ -3,6 +3,8 @@
 
 #include "AGun.h"
 
+#include "Engine/DamageEvents.h"
+#include "GameFramework/Character.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -50,6 +52,11 @@ void AAGun::PullTrigger()
 	if (GetWorld()->LineTraceSingleByChannel(Hit, Location, EndVector, ECollisionChannel::ECC_GameTraceChannel1))
 	{
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), HitEffect, Hit.ImpactPoint, Hit.ImpactNormal.Rotation());
+		if (AActor* HitActor = Hit.GetActor())
+		{
+			FPointDamageEvent DamageEvent(Damage, Hit, Rotation.Vector(), UDamageType::StaticClass());
+			Cast<ACharacter>(Hit.GetActor())->TakeDamage(Damage, DamageEvent, OwnerController, OwnerPawn);
+		}
 		// DrawDebugPoint(GetWorld(), Hit.ImpactPoint, 20.f, FColor::Red, true);
 	}
 }
