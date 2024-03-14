@@ -28,5 +28,7 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	UBehaviorTree* AIBehavior;
+
+	UBlackboardComponent* BlackboardComponent;
 	
 };
