@@ -28,6 +28,9 @@ public:
 
 	virtual float TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
+	UFUNCTION(BlueprintPure)
+	bool IsAlive() const { return Health > 0.0f; }
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
