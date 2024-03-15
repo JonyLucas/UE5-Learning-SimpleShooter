@@ -4,7 +4,9 @@
 #include "BTService_PlayerLocationAtSight.h"
 
 #include "AIController.h"
+#include "ShooterCharacter.h"
 #include "BehaviorTree/BlackboardComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 UBTService_PlayerLocationAtSight::UBTService_PlayerLocationAtSight()
 {
@@ -15,19 +17,20 @@ void UBTService_PlayerLocationAtSight::TickNode(UBehaviorTreeComponent& OwnerCom
 	float DeltaSeconds)
 {
 	Super::TickNode(OwnerComp, NodeMemory, DeltaSeconds);
-	const APawn* PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
+	const AShooterCharacter* PlayerCharacter = Cast<AShooterCharacter>(UGameplayStatics::GetPlayerPawn(GetWorld(),0));
 	const AAIController* AIController = Cast<AAIController>(OwnerComp.GetAIOwner()->GetInstigatorController());
 	
-	if (!PlayerPawn)
+	if (!PlayerCharacter || !PlayerCharacter->IsAlive())
 	{
+		OwnerComp.GetBlackboardComponent()->ClearValue(GetSelectedBlackboardKey());
 		return;
 	}
 
-	bool CheckDistance = FVector::Dist(PlayerPawn->GetActorLocation(), AIController->GetPawn()->GetActorLocation()) < 1000.f;
+	const bool CheckDistance = FVector::Dist(PlayerCharacter->GetActorLocation(), AIController->GetPawn()->GetActorLocation()) < 1000.f;
 
-	if(AIController->LineOfSightTo(PlayerPawn) && CheckDistance)
+	if(AIController->LineOfSightTo(PlayerCharacter) && CheckDistance)
 	{
-		OwnerComp.GetBlackboardComponent()->SetValueAsVector(GetSelectedBlackboardKey(), PlayerPawn->GetActorLocation());
+		OwnerComp.GetBlackboardComponent()->SetValueAsVector(GetSelectedBlackboardKey(), PlayerCharacter->GetActorLocation());
 	}
 	else
 	{

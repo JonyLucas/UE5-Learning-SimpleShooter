@@ -6,6 +6,7 @@
 #include "AGun.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Components/CapsuleComponent.h"
 
 // Sets default values
 AShooterCharacter::AShooterCharacter()
@@ -86,6 +87,12 @@ float AShooterCharacter::TakeDamage(const float DamageAmount, FDamageEvent const
 	Health -= DamageTaken;
 	Health = FMath::Clamp(Health, 0.f, MaxHealth);
 	UE_LOG(LogTemp, Warning, TEXT("Health: %f"), Health);
+
+	if(!IsAlive())
+	{
+		DetachFromControllerPendingDestroy();
+		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	}
 	return DamageTaken;
 }
 
