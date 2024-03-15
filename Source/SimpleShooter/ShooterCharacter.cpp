@@ -91,12 +91,12 @@ float AShooterCharacter::TakeDamage(const float DamageAmount, FDamageEvent const
 
 	if(!IsAlive())
 	{
-		DetachFromControllerPendingDestroy();
-		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		if(ASimpleShooterGameMode* GameMode = GetWorld()->GetAuthGameMode<ASimpleShooterGameMode>())
 		{
 			GameMode->PawnKilled(this);
 		}
+		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		DetachFromControllerPendingDestroy();
 	}
 	return DamageTaken;
 }
