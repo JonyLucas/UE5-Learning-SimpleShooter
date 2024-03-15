@@ -31,6 +31,8 @@ public:
 	UFUNCTION(BlueprintPure)
 	bool IsAlive() const { return Health > 0.0f; }
 
+	void Fire();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -72,6 +74,5 @@ private:
 	APlayerController* PlayerController;
 	void Move(const FInputActionInstance& InputActionInstance);
 	void Look(const FInputActionInstance& InputActionInstance);
-	void Fire(const FInputActionInstance& InputActionInstance);
 
 };

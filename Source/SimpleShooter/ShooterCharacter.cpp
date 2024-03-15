@@ -72,7 +72,7 @@ void AShooterCharacter::Look(const FInputActionInstance& InputActionInstance)
 	AddControllerYawInput(LookValue.X * RotationRate * GetWorld()->DeltaTimeSeconds);
 }
 
-void AShooterCharacter::Fire(const FInputActionInstance& InputActionInstance)
+void AShooterCharacter::Fire()
 {
 	Gun->PullTrigger();
 }
