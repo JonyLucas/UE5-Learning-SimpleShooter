@@ -31,6 +31,9 @@ public:
 	UFUNCTION(BlueprintPure)
 	bool IsAlive() const { return Health > 0.0f; }
 
+	UFUNCTION(BlueprintPure)
+	float CurrentHealth() const { return Health/MaxHealth; }
+
 	void Fire();
 
 protected:

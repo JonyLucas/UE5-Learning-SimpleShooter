@@ -33,7 +33,9 @@ private:
 	UPROPERTY(EditAnywhere)
 	float RestartDelay = 5;
 
+	UPROPERTY(VisibleAnywhere)
+	UUserWidget* HudWidget;
+	
 	FTimerHandle RestartTimer;
-	UUserWidget* HudWidget;	
 	
 };
