@@ -36,6 +36,7 @@ void AAGun::PullTrigger()
 {
 	// UE_LOG(LogTemp, Warning, TEXT("Fire"));
 	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, MeshComponent, TEXT("MuzzleFlashSocket"));
+	UGameplayStatics::SpawnSoundAttached(MuzzleSound, MeshComponent, TEXT("MuzzleFlashSocket"));
 
 	APawn* OwnerPawn = Cast<APawn>(GetOwner());
 	if (OwnerPawn == nullptr) return;
@@ -70,6 +71,7 @@ void AAGun::LineTrace(APawn* OwnerPawn, AController* OwnerController, FVector Lo
 	                                         Params))
 	{
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), HitEffect, Hit.ImpactPoint, Hit.ImpactNormal.Rotation());
+		UGameplayStatics::PlaySoundAtLocation(GetWorld(), ImpactSound, Hit.ImpactPoint);
 		if (AActor* HitActor = Hit.GetActor())
 		{
 			FPointDamageEvent DamageEvent(Damage, Hit, Rotation.Vector(), UDamageType::StaticClass());

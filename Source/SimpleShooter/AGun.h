@@ -36,6 +36,12 @@ protected:
 	UPROPERTY(EditAnywhere)
 	UParticleSystem* HitEffect;
 
+	UPROPERTY(EditDefaultsOnly)
+	USoundBase* MuzzleSound;
+
+	UPROPERTY(EditDefaultsOnly)
+	USoundBase* ImpactSound;
+
 	UPROPERTY(EditAnywhere)
 	float MaxRange = 1000.f;
 
