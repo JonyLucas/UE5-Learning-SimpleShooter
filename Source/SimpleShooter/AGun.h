@@ -15,6 +15,9 @@ public:
 	// Sets default values for this actor's properties
 	AAGun();
 	virtual void Tick(float DeltaTime) override;
+	void GetTraceDirection(AController* OwnerController, FVector& Location, FRotator& Rotation, FVector& EndVector);
+	void LineTrace(APawn* OwnerPawn, AController* OwnerController, FVector Location, FRotator Rotation,
+	               FVector EndVector);
 	void PullTrigger();
 
 protected:

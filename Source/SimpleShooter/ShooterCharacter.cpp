@@ -81,9 +81,7 @@ void AShooterCharacter::Fire()
 
 float AShooterCharacter::TakeDamage(const float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator,
                                     AActor* DamageCauser)
-{
-	if(DamageCauser == this) return 0.f;
-	
+{	
 	float DamageTaken = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 	Health -= DamageTaken;
 	Health = FMath::Clamp(Health, 0.f, MaxHealth);
