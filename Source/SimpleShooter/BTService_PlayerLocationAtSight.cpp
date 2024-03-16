@@ -26,9 +26,9 @@ void UBTService_PlayerLocationAtSight::TickNode(UBehaviorTreeComponent& OwnerCom
 		return;
 	}
 
-	const bool CheckDistance = FVector::Dist(PlayerCharacter->GetActorLocation(), AIController->GetPawn()->GetActorLocation()) < 1000.f;
+	// const bool CheckDistance = FVector::Dist(PlayerCharacter->GetActorLocation(), AIController->GetPawn()->GetActorLocation()) < 1000.f;
 
-	if(AIController->LineOfSightTo(PlayerCharacter) && CheckDistance)
+	if(AIController->LineOfSightTo(PlayerCharacter))
 	{
 		OwnerComp.GetBlackboardComponent()->SetValueAsVector(GetSelectedBlackboardKey(), PlayerCharacter->GetActorLocation());
 	}

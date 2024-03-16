@@ -3,6 +3,7 @@
 
 #include "ShooterAIController.h"
 
+#include "ShooterCharacter.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -24,15 +25,26 @@ void AShooterAIController::Tick(float DeltaSeconds)
 	Super::Tick(DeltaSeconds);
 	// if (PlayerPawn && LineOfSightTo(PlayerPawn))
 	// {
-		// BlackboardComponent->SetValueAsVector(TEXT("PlayerLocation"), PlayerPawn->GetActorLocation());
-		// BlackboardComponent->SetValueAsVector(TEXT("LastKnownPlayerLocation"), PlayerPawn->GetActorLocation());
-		// 	MoveToActor(PlayerPawn, AcceptanceRadius);
-		// 	SetFocus(PlayerPawn);
+	// BlackboardComponent->SetValueAsVector(TEXT("PlayerLocation"), PlayerPawn->GetActorLocation());
+	// BlackboardComponent->SetValueAsVector(TEXT("LastKnownPlayerLocation"), PlayerPawn->GetActorLocation());
+	// 	MoveToActor(PlayerPawn, AcceptanceRadius);
+	// 	SetFocus(PlayerPawn);
 	// }
 	// else
 	// {
-		// BlackboardComponent->ClearValue(TEXT("PlayerLocation"));
-		// 	ClearFocus(EAIFocusPriority::Gameplay);
-		// 	StopMovement();
+	// BlackboardComponent->ClearValue(TEXT("PlayerLocation"));
+	// 	ClearFocus(EAIFocusPriority::Gameplay);
+	// 	StopMovement();
 	// }
+}
+
+bool AShooterAIController::IsDead() const
+{
+	AShooterCharacter* ShooterCharacter = Cast<AShooterCharacter>(GetPawn());
+	if (ShooterCharacter)
+	{
+		return !ShooterCharacter->IsAlive();
+	}
+
+	return true;
 }
