@@ -5,6 +5,16 @@
 
 #include "Blueprint/UserWidget.h"
 
+void AShooterPlayerController::BeginPlay()
+{
+	Super::BeginPlay();
+	HudWidget = CreateWidget(this, HUDScreenClass);
+	if (HudWidget != nullptr)
+	{
+		HudWidget->AddToViewport();
+	}
+}
+
 void AShooterPlayerController::GameHasEnded(AActor* EndGameFocus, bool bIsWinner)
 {
 	Super::GameHasEnded(EndGameFocus, bIsWinner);
@@ -29,5 +39,10 @@ void AShooterPlayerController::GameHasEnded(AActor* EndGameFocus, bool bIsWinner
 		{
 			Widget->AddToViewport();
 		}
+	}
+
+	if (HudWidget != nullptr)
+	{
+		HudWidget->RemoveFromParent();
 	}
 }
