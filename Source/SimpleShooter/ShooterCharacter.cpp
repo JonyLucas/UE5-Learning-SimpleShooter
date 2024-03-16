@@ -85,7 +85,6 @@ float AShooterCharacter::TakeDamage(const float DamageAmount, FDamageEvent const
 	float DamageTaken = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 	Health -= DamageTaken;
 	Health = FMath::Clamp(Health, 0.f, MaxHealth);
-	UE_LOG(LogTemp, Warning, TEXT("Health: %f"), Health);
 
 	if(!IsAlive())
 	{

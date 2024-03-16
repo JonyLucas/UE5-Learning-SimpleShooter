@@ -5,6 +5,7 @@
 
 #include "AIController.h"
 #include "ShooterCharacter.h"
+#include "BehaviorTree/BlackboardComponent.h"
 
 UBTTask_Shoot::UBTTask_Shoot()
 {
@@ -14,12 +15,8 @@ UBTTask_Shoot::UBTTask_Shoot()
 EBTNodeResult::Type UBTTask_Shoot::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	Super::ExecuteTask(OwnerComp, NodeMemory);
-	if (!AIController)
-	{
-		AIController = OwnerComp.GetAIOwner();
-	}
 
-	AShooterCharacter* Character = Cast<AShooterCharacter>(AIController->GetPawn());
+	AShooterCharacter* Character = Cast<AShooterCharacter>(OwnerComp.GetBlackboardComponent()->GetValueAsObject(TEXT("SelfActor")));
 	if (!Character)
 	{
 		return EBTNodeResult::Failed;
