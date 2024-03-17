@@ -30,7 +30,7 @@ void UBTService_PlayerLocationAtSight::TickNode(UBehaviorTreeComponent& OwnerCom
 
 	if(AIController->LineOfSightTo(PlayerCharacter))
 	{
-		OwnerComp.GetBlackboardComponent()->SetValueAsVector(GetSelectedBlackboardKey(), PlayerCharacter->GetActorLocation());
+		OwnerComp.GetBlackboardComponent()->SetValueAsObject(GetSelectedBlackboardKey(), PlayerCharacter->_getUObject());
 	}
 	else
 	{
